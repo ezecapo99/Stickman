@@ -1,0 +1,14 @@
+{
+  "name": "stickman-shooter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error no especificado\" && exit 1 "
+  },
+  "autor": "eze",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "^2.0.3"
+  }
+}
