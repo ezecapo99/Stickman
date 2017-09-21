@@ -14,28 +14,23 @@ var log = require('single-line-log').stdout;
 app.set ('port', process.env.PORT || 3000 );
 server.listen(3000, 'localhost');
 var clients = [];
-
+var connectionCounter = 0;
 io.on('connection', function (socket) {
 	
 	var currentUser;
+   connectionCounter++;
 	socket.on('USER_CONNECT', function (){
-
-		console.log('Users Connected ');
 		for (var i = 0; i < clients.length; i++) {
-			
-			
 			socket.emit('USER_CONNECTED',{
-
+              
 				name:clients[i].name,
 				id:clients[i].id,
 				position:clients[i].position
 
 			});
 
-			console.log('User name '+clients[i].name+' is connected..\n');
-
 		};
-
+    	
 	});
 
 	socket.on('PLAY', function (data){
@@ -54,7 +49,7 @@ io.on('connection', function (socket) {
 
 
 	socket.on('disconnect', function (){
-
+         connectionCounter--;
 		socket.broadcast.emit('USER_DISCONNECTED',currentUser);
 		for (var i = 0; i < clients.length; i++) {
 			if (clients[i].name === currentUser.name && clients[i].id === currentUser.id) {
@@ -64,7 +59,7 @@ io.on('connection', function (socket) {
        
 			};
 		};
-
+log("Users Connected ".cyan+connectionCounter+'\n');
 	});
 
 	socket.on('MOVE', function (data){
@@ -78,7 +73,7 @@ io.on('connection', function (socket) {
         
 
 	});
-
+log("Users Connected ".cyan+connectionCounter+'\n');
 });
 
 
