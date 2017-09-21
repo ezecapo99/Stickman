@@ -13,14 +13,11 @@ var log = require('single-line-log').stdout;
 
 app.set ('port', process.env.PORT || 3000 );
 server.listen(3000, 'localhost');
-var count = 0
 var clients = [];
 
 io.on('connection', function (socket) {
 	
 	var currentUser;
-    count++;
-    client.broadcast({count:count})
 	socket.on('USER_CONNECT', function (){
 
 		console.log('Users Connected ');
